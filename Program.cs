@@ -66,6 +66,16 @@ namespace highest_rank_num
             return mode;
         }
 
+        // public static int HighestRank(int[] arr)
+        // {
+        //     return arr
+        //       .GroupBy(i => i)
+        //       .OrderByDescending(gr => gr.Count())
+        //       .ThenByDescending(gr => gr.Key)
+        //       .Select(gr => gr.Key)
+        //       .First();
+        // }
+
         
 
     }
