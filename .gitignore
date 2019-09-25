@@ -1,0 +1,4 @@
+obj/
+bin/
+Debug/
+obj/Debug/netcore2.2/*
