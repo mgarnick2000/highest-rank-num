@@ -38,12 +38,9 @@ namespace highest_rank_num
             int highCount = arr.Where(x => x == high).Count();
             var sameCount = arr.GroupBy(v => v).Where(g => g.Count() == maxCount).Select(g => g.Key);
 
-
             int nextNum = sameCount.Max();
 
-
             var duplicates = arr.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
-            
             
             if( duplicates.Count() >  1 && nextNum > mode) {
                 WriteLine(nextNum);
