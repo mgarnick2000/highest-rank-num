@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using static System.Console;
 
 namespace highest_rank_num
@@ -19,21 +20,43 @@ namespace highest_rank_num
             // var arr = new int[] { 5, 3, 5, 6, 4, 11, 10, 3, 4, 10, 4, 5, 4, 8, 6, 6, 4, 4, 6, 6, 5, 3, 6, 4, 6, 5, 7, 10, 9, 5, 8, 7, 5, 10, 7, 6, 8, 4, 9, 3, 10, 7, 8, 3, 9, 3, 5, 10, 8, 6, 10, 10, 8, 6, 10, 6, 10, 9, 3, 7, 3, 8, 4, 4, 11, 8, 9, 10 };
             var arr = new int[] { 10, 12, 8, 12, 7, 6, 4, 10, 12, 10 };
             // var arr = new int[] { 9, 10, 4, 3, 9, 3, 11, 11, 5, 9, 9 };
+            // var arr = new int[] { 8, 4, 10, 5, 9, 8, 7, 10, 11, 11, 10, 7, 9, 4, 8, 3, 3 };
             // var arr = new int[] { 8, 11 };
             HighestRank(arr);
         }
 
+        
+
         public static int HighestRank(int[] arr)
         {
-            
+
             var groups = arr.GroupBy(v => v);
             int maxCount = groups.Max(g => g.Count());
             int mode = groups.First(g => g.Count() == maxCount).Key;
 
             int high = arr.OrderByDescending(i => i).First();
+            int highCount = arr.Where(x => x == high).Count();
+            var sameCount = arr.GroupBy(v => v).Where(g => g.Count() == maxCount).Select(g => g.Key);
 
-            if (maxCount == 1)
+
+            int nextNum = sameCount.Max();
+
+
+            var duplicates = arr.GroupBy(v => v).Where(g => g.Count() > 1).Select(g => g.Key);
+            
+            
+            if( duplicates.Count() >  1 && nextNum > mode) {
+                WriteLine(nextNum);
+                return nextNum;
+            }
+
+            if (maxCount <= 1)
             {
+                WriteLine(high);
+                return high;
+            }
+
+            if (duplicates.Count() > 1 && highCount == maxCount) {
                 WriteLine(high);
                 return high;
             }
@@ -42,6 +65,8 @@ namespace highest_rank_num
             WriteLine(mode);
             return mode;
         }
+
+        
 
     }
 }
